@@ -29,12 +29,12 @@ X_train = np.c_[np.ones(x_train.shape[0]), x_train]
 X_test = np.c_[np.ones(x_test.shape[0]), x_test]
 theta_best = np.linalg.inv(X_train.T.dot(X_train)).dot(X_train.T).dot(y_train)
 
-print("θ (closed form)\t\t", theta_best)
+print("θ (best theta)\t\t", theta_best)
 
 
 # TODO: calculate error
 error = np.mean((get_theta(theta_best, x_test) - y_test) ** 2)
-print("MSE = ", error)
+print("MSE (linear) = ", error)
 
 
 # plot the regression line
@@ -51,10 +51,13 @@ plt.show()
 # średnia i odchylenie standardowe
 x_mean = np.mean(x_train)
 x_std = np.std(x_train)
-
-# Standaryzacja danych wejściowych (tylko X)
+y_mean = np.mean(y_train)
+y_std = np.std(y_train)
+# Standaryzacja danych
 x_train = (x_train - x_mean) / x_std
-x_test = (x_test - x_mean) / x_std  # Normalizujemy testowe dane tak samo
+x_test = (x_test - x_mean) / x_std
+y_train = (y_train - y_mean) / y_std
+y_test = (y_test - y_mean) / y_std
 
 
 # TODO: calculate theta using Batch Gradient Descent
@@ -62,7 +65,7 @@ x_test = (x_test - x_mean) / x_std  # Normalizujemy testowe dane tak samo
 learning_rate = 0.1
 n_iterations = 1000
 tolerance = 1e-6
-m = len(x_train)  # Liczba próbek
+m = len(x_train)
 
 theta = np.random.rand(2)  # Losowa inicjalizacja parametrów theta_0 i theta_1
 x_train = np.c_[np.ones(m), x_train]  # Dodanie kolumny jedynek dla theta_0
@@ -82,7 +85,7 @@ for iteration in range(n_iterations):
 
 # TODO: calculate error
 error = np.mean((get_theta(theta, x_test) - y_test) ** 2)
-print("MSE = ", error)
+print("MSE (standarized) = ", error)
 
 
 # plot the regression line
