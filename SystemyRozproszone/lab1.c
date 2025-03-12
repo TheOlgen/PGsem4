@@ -30,6 +30,7 @@ void insert(struct list* lista, int num)
     }
     lista->last = node;
     lista->size += 1;
+    printf("Dodano %d do listy\n", num);
 }
 
 void insertAt(struct list* lista, int num, int insertHere)
@@ -67,6 +68,7 @@ void insertAt(struct list* lista, int num, int insertHere)
         node->next = newNode;
     }
     lista->size += 1;
+    printf("Dodano %d do listy, na pozycji %d \n", num, insertHere);
 }
 
 struct list* makeList(int* data, int len)
@@ -95,7 +97,7 @@ struct list* makeList(int* data, int len)
     for (int i = 1; i < len; i++) {
         insert(lista, data[i]);
     }
-
+    printf("Stworzono liste: \n");
     return lista;
 }
 
@@ -108,7 +110,8 @@ void printList(struct list* lista)
     }
     printf("\n");
 }
-void deleteNodeAt(struct list* lista, int position)
+
+void deleteNode(struct list* lista, int position)
 {
     if (position < 0 || position >= lista->size) {
         printf("Nieprawidłowa pozycja!\n");
@@ -135,6 +138,7 @@ void deleteNodeAt(struct list* lista, int position)
     }
     free(node);
     lista->size -= 1;
+    printf("usunięto dane z pozycji: %d listy \n", position);
 }
 
 
@@ -147,6 +151,7 @@ void freeList(struct list* lista)
         current = next;
     }
     free(lista);
+    printf("Usunięto liste\n");
 }
 
 int main(void)
